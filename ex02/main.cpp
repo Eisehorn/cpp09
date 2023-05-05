@@ -1,22 +1,56 @@
 #include "PmergeMe.hpp"
 
 int main(int argc, char **argv) {
+    std::list<int> l;
+	std::deque<int> d;
+    
     if (argc < 2) {
         std::cout << "Error" <<std::endl;
         return 0;
     }
     std::string args;
-    int i = 1;
-    while (argv[i]) {
-        if (atoi(argv[i]) < 0) {
+    int j = 1;
+    int k;
+    while (argv[j]) {
+        if ((k = atoi(argv[j])) < 0) {
             std::cout << "Error" <<std::endl;            
             return 0;
         }
-        if (i != 0)
+        if (j != 0) 
             args += std::string(" ");
-        args += std::string(argv[i]);
-        i++;
+        args += std::string(argv[j]);
+        l.push_back(k);
+        d.push_back(k);
+        j++;
     }
     std::cout << "Before : " << args << std::endl;
-    
+	for (std::list<int>::iterator i = l.begin(); i != l.end(); i++)
+		std::cout << " " << *i;
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::clock_t start = std::clock();
+	insertmerge(l.begin(), l.end());
+	std::clock_t end = std::clock();
+	double seconds = static_cast<double> (end - start) / CLOCKS_PER_SEC;
+
+	std::cout << "After with std::list:";
+	for (std::list<int>::iterator i = l.begin(); i != l.end(); i++)
+		std::cout << " " << *i;
+	std::cout << std::endl;
+	std::cout << "Time: " << std::fixed << seconds << std::setprecision(9) << " seconds" << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	start = std::clock();
+	insertmerge(d.begin(), d.end());
+	end = std::clock();
+	seconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+
+	std::cout << "After with std::deque:";
+	for (std::deque<int>::iterator i = d.begin(); i != d.end(); i++)
+		std::cout << " " << *i;
+	std::cout << std::endl;
+	std::cout << "Time: " << std::fixed << seconds << std::setprecision(9) << " seconds" << std::endl;
+	std::cout << std::endl;
 }
