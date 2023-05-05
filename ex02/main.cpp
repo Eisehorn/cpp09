@@ -38,19 +38,21 @@ int main(int argc, char **argv) {
 	for (std::list<int>::iterator i = l.begin(); i != l.end(); i++)
 		std::cout << " " << *i;
 	std::cout << std::endl;
-	std::cout << "Time: " << std::fixed << seconds << std::setprecision(9) << " seconds" << std::endl;
+	std::cout << std::fixed << std::setprecision(9);
+	std::cout << "Time: " << seconds << " seconds" << std::endl;
 	std::cout << std::endl;
 	std::cout << std::endl;
 
-	start = std::clock();
+
+	std::clock_t startdeque = std::clock();
 	insertmerge(d.begin(), d.end());
-	end = std::clock();
-	seconds = static_cast<double>(end - start) / CLOCKS_PER_SEC;
+	std::clock_t enddeque = std::clock();
+	double secondsdeque = static_cast<double>(enddeque - startdeque) / CLOCKS_PER_SEC;
 
 	std::cout << "After with std::deque:";
 	for (std::deque<int>::iterator i = d.begin(); i != d.end(); i++)
 		std::cout << " " << *i;
 	std::cout << std::endl;
-	std::cout << "Time: " << std::fixed << seconds << std::setprecision(9) << " seconds" << std::endl;
+	std::cout << "Time: " << secondsdeque << " seconds" << std::endl;
 	std::cout << std::endl;
 }

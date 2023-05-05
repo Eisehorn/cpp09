@@ -1,5 +1,4 @@
 #include "BitcoinExchange.hpp"
-#include "Exception.hpp"
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &src) {
 	this->csvMap = src.csvMap;
